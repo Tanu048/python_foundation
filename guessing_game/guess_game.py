@@ -8,7 +8,7 @@ if upper_bond>=0:
     random_number=rd.randint(0,upper_bond)
 else:
     print("Type an integer greater than 0 next time!")
-    quit()                                                            # ends that program 
+    quit()                                                            # ends the program 
 
 while True:
     user_input=input("make a guess: ")
