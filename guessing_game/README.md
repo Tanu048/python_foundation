@@ -26,3 +26,7 @@ A simple Python **command-line guessing game** where the player tries to guess a
 
 ```bash
 python guess_game.py
+
+---
+
+📝 *This project is part of my Python learning journey and focuses on understanding core fundamentals.*
