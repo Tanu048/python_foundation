@@ -13,16 +13,22 @@ def list_items():
     print(f)    
 
 def complete_task(task):
-    with open(file,'r') as f:
-        for line in f: 
-            if line==task:
-                print(line)
+    with open(file, "r") as f:
+        tasks = f.readlines()
+    List=[work for work in tasks if task.lower() in work.lower()]
 
-def del_task(task):
-    with open(file,'r') as f:
-        for line in file: 
-            if line==task:
-                print(line)
+    
+
+
+def del_task(word):
+    with open(file, "r") as f:
+        tasks = f.readlines()
+
+    tasks = [task for task in tasks if word.lower() not in task.lower()]
+
+    with open(file, "w") as f:
+        f.writelines(tasks)
+
 
 
 
@@ -40,8 +46,8 @@ while i!=-1:
             task=input('Enter completed task: ')
             complete_task(task)
         case 4:
-            task=input("Enter task to delete: ")
-            del_task(task)
+            word=input("Enter task to delete: ")
+            del_task(word)
         case 5:
             i=-1
             print("PROGRAM QUITS!!!")
