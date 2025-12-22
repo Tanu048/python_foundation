@@ -1,3 +1,4 @@
 [ ]make bed
 [ ]breakfast
-[ ]make lunch
+[ ]shower
+[ ]work
