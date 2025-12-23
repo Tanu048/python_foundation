@@ -15,7 +15,15 @@ def list_items():
 def complete_task(task):
     with open(file, "r") as f:
         tasks = f.readlines()
-    List=[work for work in tasks if task.lower() in work.lower()]
+
+    for i, word in enumerate(tasks):
+        if task.lower() in word.lower() and "[ ]" in word:
+            tasks[i] = word.replace("[ ]", "[x]", 1)
+            break
+
+    with open(file, "w") as f:
+        f.writelines(tasks)
+
 
     
 
