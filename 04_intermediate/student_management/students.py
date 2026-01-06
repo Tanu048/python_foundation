@@ -6,26 +6,29 @@ file="student_log.txt"
 
 def load_data():
    students={}
-   with open(file,"w+") as f:
+   with open(file,"r") as f:
          for line in f:
             sclass,sroll,sname,smarks =line.strip().split(",")
+            sclass = int(sclass)
+            sroll = int(sroll)
+            smarks = int(smarks)
             students.setdefault(sclass,{})
             students[sclass][sroll]={"name":sname,"marks":smarks}
    return students
    
 def save_data(students):
-    with open(file, "a+") as f:
+    with open(file, "w") as f:
         for cls in students:
             for roll in students[cls]:
                 s = students[cls][roll]
                 f.write(f"{cls},{roll},{s['name']},{s['marks']}\n")
 
-def add_student():
+def add_student(students):
     sclass=int(input('Enter class: '))
     sroll=int(input('Enter roll number: '))
     sname=(input('Enter name: '))
     smarks=int(input('Enter marks: '))
-    students={sclass:{sroll:{"name":sname,"marks":smarks}}}
+    students.setdefault(sclass,{})
     if sclass not in students:
        students[sclass]={}
 
@@ -34,62 +37,67 @@ def add_student():
 
 
 def view_data(students):
+   flag=False
    for cls in students:
       for roll,s in students[cls].items():         #here roll is a key and s is a value so roll,s is a key value pair in students
          print(f"Class: {cls}\tRoll Number: {roll}\tName: {s['name']}\tMarks: {s['marks']}\n")
-
+         flag=True
+   if not flag:
+      print("------ Data not found")
 
 def searchByRoll(students):
-   roll=(input("Enter roll number: "))
+   roll=int(input("Enter roll number: "))
+   found=False
    for cls in students:
       if roll in students[cls]: 
-         print(f"Found {students[cls][roll]}")
-      else:
-         print("Student not found.")
+         print(f"------ Found {students[cls][roll]}")
+         found=True
+   if found==False:
+      print("------ student not found")
          
 def searchByName(students):
    name=(input("Enter name: "))
+   found=False
    for cls in students:
       for roll in students[cls]:
          if name.title() in students[cls][roll]["name"]: 
-            print(f"Found {cls},{{{roll}}}{students[cls][roll]}")
-         else:
-            print("Student not found.")
+            print(f"------ Found {cls},{{{roll}}}{students[cls][roll]}")
+            found=True
+   if not found:
+      print("------ student not found")
 
 
 def delete(students):
-   cls=input("Enter the class:")
-   roll=input("Enter the roll number:")
+   cls=int(input("Enter the class:"))
+   roll=int(input("Enter the roll number:"))
    if cls in students and roll in students[cls]:
       del students[cls][roll]
+      print("------ Data deleted")
    else:
-      print("entry not found.")
+      print("------ Entry not found")
    save_data(students)
-   
             
 def main():
    students=load_data()
    flag=0
-   print("Welcome to student management system!!!\n")
+   print("-----------------------------------------------------------Welcome to student management system!!!-----------------------------------------------------------\n")
    while (flag != -1):
-      choice=int(input('choose:\n1. to add a student \n2. to view list \n3. to search a student \n\ta.By ROll Number \n\tb.By Name   \n4. to delete a student\n5. to exit '))
+      choice=float(input('choose:\n1. to add a student \n2. to view list \n3. to search a student \n\t3.1 -> By ROll Number \n\t3.2 -> By Name   \n4. to delete a student\n5. to exit\n'))
       match choice:
          case 1:
-            add_student()
+            add_student(students)
          case 2:
             view_data(students)
-         case 'a':
+         case 3.1:
             searchByRoll(students)
-         case 'b':
+         case 3.2:
             searchByName(students)
          case 4:
             delete(students)
          case 5:
+            print("-----------------------------------------------------------Program ends-----------------------------------------------------------")
             flag=-1
          case _:
-            print("Enter valid inputs!!!")
+            print("\t\tENTER VALID INPUT!!!")
 
-students=load_data()
-add_student()
-add_student()
-delete(students)
+main()
