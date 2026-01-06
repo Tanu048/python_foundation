@@ -11,17 +11,17 @@ def load_data():
             sclass,sroll,sname,smarks =line.strip().split(",")
             sclass = int(sclass)
             sroll = int(sroll)
-            smarks = int(smarks)
-            students.setdefault(sclass,{})
+            smarks = int(smarks)   # converting all to int to make access easy
+            students.setdefault(sclass,{})  #setdefault creates the dictionary only when needed else uses existing 
             students[sclass][sroll]={"name":sname,"marks":smarks}
    return students
    
 def save_data(students):
     with open(file, "w") as f:
         for cls in students:
-            for roll in students[cls]:
+            for roll in students[cls]:   #or can use roll,s
                 s = students[cls][roll]
-                f.write(f"{cls},{roll},{s['name']},{s['marks']}\n")
+                f.write(f"{cls},{roll},{s['name']},{s['marks']}\n") 
 
 def add_student(students):
     sclass=int(input('Enter class: '))
@@ -30,14 +30,14 @@ def add_student(students):
     smarks=int(input('Enter marks: '))
     students.setdefault(sclass,{})
     if sclass not in students:
-       students[sclass]={}
+       students[sclass]={}  #creates a new class if not existing
 
     students[sclass][sroll]={"name":sname.title(),"marks":smarks}
     save_data(students)
 
 
 def view_data(students):
-   flag=False
+   flag=False              #or use error handling 
    for cls in students:
       for roll,s in students[cls].items():         #here roll is a key and s is a value so roll,s is a key value pair in students
          print(f"Class: {cls}\tRoll Number: {roll}\tName: {s['name']}\tMarks: {s['marks']}\n")
@@ -71,7 +71,7 @@ def delete(students):
    cls=int(input("Enter the class:"))
    roll=int(input("Enter the roll number:"))
    if cls in students and roll in students[cls]:
-      del students[cls][roll]
+      del students[cls][roll]           # deletes particular entry
       print("------ Data deleted")
    else:
       print("------ Entry not found")
