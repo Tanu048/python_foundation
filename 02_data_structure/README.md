@@ -24,42 +24,36 @@ Projects included:
 ### 🔐 Password Checker (CLI)
 
 A simple password validation program that checks user-entered passwords against predefined rules.
+---
 
-    ---
-
-    **Key Capabilities**
-    * Takes user input securely via CLI
-    * Validates password based on conditions (length, characters, etc.)
-    * Provides clear feedback for valid or invalid passwords
-
-    ---
-
-    **Concepts Used**
-    * Strings
-    * Conditional statements
-    * Logical operators
-    * Input validation
+**Key Capabilities**
+* Takes user input securely via CLI
+* Validates password based on conditions (length, characters, etc.)
+* Provides clear feedback for valid or invalid passwords
+---
+**Concepts Used**
+* Strings
+* Conditional statements
+* Logical operators
+* Input validation
 
 ---
 
 ### ❓ Quiz Game (CLI)
 
 A command-line based quiz game that asks users multiple questions and calculates their final score.
+---
 
-    ---
-
-    **Key Capabilities**
-    * Stores questions and answers using data structures
-    * Evaluates user responses
-    * Tracks and displays the final 
-
-    ---
-
-    **Concepts Used**
-    * Lists / Dictionaries
-    * Loops
-    * Conditionals
-    * Score tracking logic
+**Key Capabilities**
+* Stores questions and answers using data structures
+* Evaluates user responses
+* Tracks and displays the final 
+---
+**Concepts Used**
+* Lists / Dictionaries
+* Loops
+* Conditionals
+* Score tracking logic
 
 ---
 
