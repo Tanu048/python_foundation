@@ -38,14 +38,15 @@ The project was built to strengthen understanding of how real applications manag
 
 Clone the repository:
 ```bash
-git clone <your-repo-link>
-cd <your-folder-name>
+git clone https://github.com/Tanu048/python_foundation
+cd student_management
+```
 
 
 Run the program
 
 ```bash
-python main.py
+python students.py
 ```
 
 📂 Project Structure
@@ -53,9 +54,8 @@ python main.py
 ```
 student-management-system/
 │
-├── student_log.txt     # Persistent storage
-├── main.py             # Core logic
-└── README.md           # Documentation
+├── data_log.txt     # Persistent storage
+└── students.py             # Core logic
 ```
 ---
 
@@ -85,6 +85,7 @@ student-management-system/
 
 ---
 
+The project was built to strengthen understanding of how real applications manage in-memory data vs stored data.
+Built while learning Python fundamentals and logical problem solving.
 
- The project was built to strengthen understanding of how real applications manage in-memory data vs stored data.
- Built while learning Python fundamentals and logical problem solving.
+ ---
