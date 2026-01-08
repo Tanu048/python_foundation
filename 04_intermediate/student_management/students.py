@@ -3,6 +3,13 @@
 data_logs = "student_log.txt"
 
 #  add the load function to get data from file into dictonary and save function to save data from dictonary to file as when program runs it uses dict and not file hence both load and save are important
+# structure for the dictionary is:
+# students = {
+#   "class"(str): {
+#       "roll"(str): {"name": str, "marks": int}
+#   }
+# }
+
 
 
 def load_data():
@@ -31,6 +38,14 @@ def save_data(students):
                 f.write(f"{cls},{roll},{s['name']},{s['marks']}\n")
 
 
+def is_valid_student(cls, roll, students):
+    if cls not in students:
+        return False
+    if roll not in students[cls]:
+        return False
+    return True
+
+
 def add_student(students):
     try:
         sclass = input("Enter class: ")
@@ -39,6 +54,10 @@ def add_student(students):
         smarks = int(input("Enter marks: "))
     except ValueError:
         print("Enter valid data types(integers for marks rest strings)")
+        return
+
+    if smarks < 0:
+        print("Enter positive value.")
         return
 
     if sclass not in students:
@@ -50,7 +69,7 @@ def add_student(students):
     students[sclass][sroll] = {
         "name": sname.lower(),
         "marks": smarks,
-    }  # students = { class : { roll : {name, marks} } }
+    }  
 
     save_data(students)
 
@@ -58,27 +77,28 @@ def add_student(students):
 def view_data(students):
     if not students:
         print("------ Data not found")
+        return
     for cls in students:
         for roll, s in students[
             cls
         ].items():  # here roll is a key and s is a value so roll,s is a key value pair in students
             print(
-                f"Class: {cls}\tRoll Number: {roll}\tName: {s['name']}\tMarks: {s['marks']}\n"
+                f"Class: {cls} | Roll: {roll} | Name: {s['name']} | Marks: {s['marks']}"
             )
 
 
-def searchByRoll(students):
+def search_by_roll(students):
     roll = input("Enter roll number: ")
     found = False
     for cls in students:
         if roll in students[cls]:
-            print(f"------ Found {students[cls][roll]}")
+            print(f"------ Found in Class {cls}: {students[cls][roll]}")
             found = True
-    if found == False:
-        print("------ student not found")
+    if not found:
+        print("------ Not found")
 
 
-def searchByName(students):
+def search_by_name(students):
     name = input("Enter name: ")
     found = False
     for cls in students:
@@ -87,13 +107,13 @@ def searchByName(students):
                 print(f"------ Found {cls},{{{roll}}}{students[cls][roll]}")
                 found = True
     if not found:
-        print("------ student not found")
+        print("------ Not found")
 
 
 def delete_student(students):
     cls = input("Enter the class:")
     roll = input("Enter the roll number:")
-    if cls in students and roll in students[cls]:
+    if is_valid_student(cls,roll,students):
         del students[cls][roll]  # deletes particular entry
         print("------ Data deleted")
         if cls in students and not students[cls]:
@@ -105,9 +125,8 @@ def delete_student(students):
 
 def main():
     students = load_data()
-    flag = 0
     print(f"{"-"*50}Welcome to student management system!!!{"-"*70}\n")
-    while flag != -1:
+    while True:
         choice = input(
             "choose:\n1. to add a student \n2. to view list \n3. to search a student\n4. to delete a student\n5. to exit\n"
         )
@@ -119,14 +138,14 @@ def main():
             case "3":
                 sub = input("a. By Roll\nb. By Name\nChoose: ")
                 if sub == "a":
-                    searchByRoll(students)
+                    search_by_roll(students)
                 elif sub == "b":
-                    searchByName(students)
+                    search_by_name(students)
             case "4":
                 delete_student(students)
             case "5":
                 print(f"{"-"*60}Program ends{"-"*60}")
-                flag = -1
+                break
             case _:
                 print("\t\tENTER VALID INPUT!!!")
 
